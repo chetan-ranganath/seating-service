@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: seating-config
+  namespace: seating-namespace
+data:
+  spring.datasource.url: jdbc:postgresql://postgres:5432/seatsDB
+  spring.datasource.username: scalable
+  spring.jpa.hibernate.ddl-auto: update
+  spring.application.name: seating-service
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: seating-secrets
+  namespace: seating-namespace
+type: Opaque
+stringData:
+  spring.datasource.password: admin123
