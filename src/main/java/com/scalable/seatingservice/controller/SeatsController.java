@@ -17,31 +17,32 @@ public class SeatsController {
 
     @GetMapping
     public ResponseEntity<?> getSeatsByEventId(@RequestParam("eventId") String eventId,
-    @RequestHeader( value = "trackingHeader" ,required = true) String trackingHeader) throws BaseException {
+    @RequestHeader( value = "X-Correlation-ID" ,required = true) String trackingHeader) throws BaseException {
+
         return ResponseEntity.ok(service.findSeatsByEventId(eventId));
     }
 
 
     @GetMapping("/availability/{eventId}" )
     public ResponseEntity<?> getSeatCountsForEvent(@PathVariable String eventId,
-                                                   @RequestHeader( value = "trackingHeader" ,required = true) String trackingHeader){
+                                                   @RequestHeader( value = "X-Correlation-ID" ,required = true) String trackingHeader){
         return ResponseEntity.ok(service.getSeatCountByEvent(eventId));
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<?> reserveSeats(@RequestHeader( value = "trackingHeader" ,required = true) String trackingHeader ,
+    public ResponseEntity<?> reserveSeats(@RequestHeader( value = "X-Correlation-ID" ,required = true) String trackingHeader ,
                                           @RequestBody SeatActionRequest seatActionRequest) throws BaseException {
         return ResponseEntity.ok(service.reserveSeats(seatActionRequest));
     }
 
     @PostMapping("/allocate")
-    public ResponseEntity<?> allocateSeats(@RequestHeader( value = "trackingHeader" ,required = true) String trackingHeader ,
+    public ResponseEntity<?> allocateSeats(@RequestHeader( value = "X-Correlation-ID" ,required = true) String trackingHeader ,
                                           @RequestBody SeatActionRequest seatActionRequest) throws BaseException {
         return ResponseEntity.ok(service.allocateSeats(seatActionRequest));
     }
 
     @PostMapping("/release")
-    public ResponseEntity<?> releaseSeats(@RequestHeader( value = "trackingHeader" ,required = true) String trackingHeader ,
+    public ResponseEntity<?> releaseSeats(@RequestHeader( value = "X-Correlation-ID" ,required = true) String trackingHeader ,
                                            @RequestBody SeatActionRequest seatActionRequest) throws BaseException {
         return ResponseEntity.ok(service.releaseSeats(seatActionRequest));
     }
